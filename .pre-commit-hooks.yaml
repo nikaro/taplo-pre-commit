@@ -1,0 +1,40 @@
+- id: taplo-lint
+  name: taplo-lint
+  description: Lint TOML documents
+  entry: taplo lint
+  args: [--default-schema-catalogs]
+  types_or: [toml]
+  language: rust
+  # renovate: datasource=crate depName=taplo-cli
+  additional_dependencies: ["cli:taplo-cli:0.8.1"]
+  minimum_pre_commit_version: 1.10.0
+
+- id: taplo-format
+  name: taplo-format
+  description: Format TOML documents
+  entry: taplo format
+  types_or: [toml]
+  language: rust
+  # renovate: datasource=crate depName=taplo-cli
+  additional_dependencies: ["cli:taplo-cli:0.8.1"]
+  minimum_pre_commit_version: 1.10.0
+
+- id: taplo-lint-docker
+  name: taplo-lint
+  description: Lint TOML documents
+  # renovate: datasource=docker depName=tamasfe/taplo
+  entry: tamasfe/taplo:0.8.1
+  args: [lint, --default-schema-catalogs]
+  types_or: [toml]
+  language: docker_image
+  minimum_pre_commit_version: 0.18.0
+
+- id: taplo-format-docker
+  name: taplo-format
+  description: Format TOML documents
+  # renovate: datasource=docker depName=tamasfe/taplo
+  entry: tamasfe/taplo:0.8.1
+  args: [format]
+  types_or: [toml]
+  language: docker_image
+  minimum_pre_commit_version: 0.18.0
