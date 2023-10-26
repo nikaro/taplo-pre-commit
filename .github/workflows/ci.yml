@@ -19,3 +19,19 @@ jobs:
 
       - name: Run pre-commit
         uses: nikaro/actions/pre-commit@40d81c46be169002caa7e22cd8710d7467d41747 # 0.7.4
+
+  test:
+    name: Test
+    needs: [lint]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Install pre-commit
+        run: pipx install pre-commit
+
+      - name: Try pre-commit
+        run: pre-commit try-repo --verbose --all-files .

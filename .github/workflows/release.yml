@@ -24,6 +24,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@e106e5c43e8ca1edea6383a39a01c5ca495fd812 # v1.3.1
+        with:
+          check-name: Test
+          ref: ${{ github.ref }}
+          repo-token: ${{ github.token }}
+
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
