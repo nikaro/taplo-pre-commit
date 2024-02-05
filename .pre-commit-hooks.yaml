@@ -6,7 +6,7 @@
   types_or: [toml]
   language: rust
   # renovate: datasource=crate depName=taplo-cli
-  additional_dependencies: ["cli:taplo-cli:0.8.1"]
+  additional_dependencies: ["cli:taplo-cli:0.9.0"]
   minimum_pre_commit_version: 1.10.0
 
 - id: taplo-format
@@ -16,7 +16,7 @@
   types_or: [toml]
   language: rust
   # renovate: datasource=crate depName=taplo-cli
-  additional_dependencies: ["cli:taplo-cli:0.8.1"]
+  additional_dependencies: ["cli:taplo-cli:0.9.0"]
   minimum_pre_commit_version: 1.10.0
 
 - id: taplo-lint-docker
