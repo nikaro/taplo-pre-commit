@@ -1,25 +1,13 @@
 name: Release
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - .github/**
-      - .cz.toml
-      - .gitignore
-      - .pre-commit-config.yaml
-      - .yamllint.yml
-      - CHANGELOG.md
+  schedule:
+    - cron: "0 0 * * 3"
   workflow_dispatch:
-
-env:
-  # renovate: datasource=pypi depName=commitizen
-  COMMITIZEN_VERSION: 3.25.0
 
 jobs:
   release:
     name: Release
-    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-22.04
     permissions:
       contents: write
@@ -41,19 +29,18 @@ jobs:
         with:
           github_token: ${{ github.token }}
           changelog_increment_filename: _changelog.md
-          commitizen_version: ${{ env.COMMITIZEN_VERSION }}
           dry_run: true
 
       - name: Bump
+        id: cz
         uses: commitizen-tools/commitizen-action@1f11eb222996406681d2bfa1eb3d997eca46557c # 0.21.0
         with:
           github_token: ${{ github.token }}
           changelog_increment_filename: _changelog.md
-          commitizen_version: ${{ env.COMMITIZEN_VERSION }}
 
       - name: Release
         uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5 # v1.14.0
         with:
           bodyFile: _changelog.md
           skipIfReleaseExists: true
-          tag: ${{ env.REVISION }}
+          tag: ${{ steps.cz.outputs.version }}
