@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
 
       - name: Run pre-commit
-        uses: nikaro/actions/pre-commit@e77a13149bd439f1dce6e1ab7eee379855f71a0e # 1.6.1
+        uses: nikaro/actions/pre-commit@14aa995fffd9335664b85b187220a6dd41dd4b8e # 1.6.2
 
   test:
     name: Test
